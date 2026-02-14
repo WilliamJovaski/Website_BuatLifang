@@ -1,0 +1,774 @@
+/* --- RESET DASAR --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* --- UBAH BAGIAN INI --- */
+    display: flex;
+    flex-direction: column;
+    
+    /* GANTI 'center' JADI 'flex-start' */
+    /* Ini artinya: Mulai susun dari ATAS, jangan di tengah */
+    justify-content: flex-start; 
+    
+    align-items: center;
+    min-height: 100vh;
+    
+    /* Tambahkan jarak biar gak mepet banget sama layar atas */
+    padding-top: 50px;
+    padding-bottom: 50px; 
+
+    /* --- SISA KODE LAMA BIARKAN --- */
+    background-color: #F9F7F2; 
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden; 
+}
+
+/* --- 1. LAYOUT UTAMA (KIRI KANAN) --- */
+.container {
+    display: flex;             /* Baris ke samping */
+    flex-direction: row;       /* Foto di Kiri, Kartu di Kanan */
+    align-items: center;       /* Rata tengah vertikal */
+    gap: 50px;                 /* Jarak antara Foto dan Kartu */
+    
+    /* Biar responsif (aman di HP) */
+    flex-wrap: wrap;           
+    justify-content: center;
+    padding: 20px;             /* Jarak aman dari pinggir layar */
+}
+
+/* --- 2. GAYA FOTO (POLAROID) --- */
+/* --- GAYA POLAROID GEDE --- */
+.polaroid-gede {
+    /* 1. Bikin Kotak Putihnya (Kertas Polaroid) */
+    background-color: rgb(132, 131, 131);
+    ;
+    /* Padding: Atas-Kanan-Kiri 20px, BAWAH 100px (biar muat tulisan) */
+    padding: 20px 20px 100px 20px; 
+    margin-top :200px;
+    margin-right: 1350px;
+    /* 2. Ukuran Polaroid (Lebih Gede) */
+    width: 700px;  /* Lebar polaroid */
+    /* Tinggi otomatis menyesuaikan foto + padding */
+    
+    /* 3. Efek Bayangan & Miring */
+    box-shadow: 30px 30px 45px rgba(0,0,0,0.2); /* Bayangan tebal */
+    transform: rotate(-3deg); /* Miring estetik ke kiri */
+    
+    /* Biar tulisan di tengah */
+    text-align: center;
+    
+    /* Transisi halus kalau disentuh mouse */
+    transition: transform 0.3s ease;
+}
+
+/* Efek pas mouse diarahkan (jadi lurus) */
+.polaroid-gede:hover {
+    transform: scale(1.02) rotate(0deg); 
+    z-index: 10;
+}
+
+/* 4. Pengaturan Fotonya */
+.polaroid-gede img {
+    width: 100%;       /* Foto ngikutin lebar kertas */
+    height: auto;      /* Tinggi menyesuaikan */
+    display: block;    /* Biar rapi */
+    border: 8px solid #2d0202; /* Garis tipis pinggir foto */
+    
+    /* Filter Vintage (Opsional, hapus kalau mau warna asli) */
+    filter: sepia(10%) contrast(110%);
+}
+
+/* 5. Pengaturan Tulisan (Caption) */
+.polaroid-gede .caption {
+    font-family: 'Dancing Script', cursive; /* Font tulisan tangan */
+    font-size: 2.5rem;   /* Ukuran tulisan besar */
+    color: #e4e4e4;         /* Warna tulisan hitam pudar */
+    margin-top: 30px;    /* Jarak dari foto ke tulisan */
+}
+
+/* Efek pas kursor diarahkan ke foto */
+.foto-kotak:hover {
+    transform: scale(1.05) rotate(0deg); /* Jadi lurus dan membesar */
+    transition: transform 0.3s ease;
+}
+
+/* --- 3. GAYA KARTU SURAT --- */
+.card {
+    /* --- 1. MENGATUR UKURAN (MEMPERBESAR) --- */
+    /* Ubah angka ini kalau mau lebih lebar/tinggi */
+    width: 1000px;          /* Lebih lebar dari sebelumnya (350px) */
+    min-height: 1200px;     /* Lebih tinggi biar muat banyak tulisan */
+    padding: 80px;         /* Jarak tulisan dari pinggir kertas (biar gak nabrak) */
+margin-top: -1900px;
+    /* --- 2. JADIKAN GAMBAR SEBAGAI BACKGROUND --- */
+    /* Ganti 'kertas.jpg' sesuai nama file gambar kamu */
+    background-image: url('Images/Gambar_Surat.png'); 
+    
+    /* Jurus Memperbesar Gambar: */
+    /* 'cover' = Gambar ditarik menutupi seluruh kartu tanpa gepeng */
+    /* '100% 100%' = Gambar dipaksa pas seukuran kartu (bisa gepeng dikit) */
+    background-size: 500% 500%; 
+    
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* --- 3. HAPUS DEKORASI LAMA --- */
+    /* Hapus background-color karena sudah pakai gambar */
+    background-color: transparent; 
+    
+    /* Hapus border hitam kalau gambar kertasnya sudah punya pinggiran bagus */
+    border: none; 
+    margin-left: 1200px;
+    /* Bayangan tetap ada biar terlihat melayang */
+    box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.2); 
+
+    /* --- 4. TATA LETAK ISI --- */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; 
+    overflow: hidden; 
+}
+
+/* --- 4. ELEMEN-ELEMEN DALAM KARTU --- */
+
+/* Judul Miring (Kanan Atas) */
+.judul-mereng-kanan {
+    position: absolute;
+    top: 65px;
+    right: 15px;
+    transform: rotate(20deg); /* Miring ekstrim */
+    
+    font-family: 'Dancing Script', cursive;
+    color: #800000;           /* Merah Marun */
+    font-size: 4rem;          /* Ukuran pas (jangan 10rem, kegedean!) */
+    line-height: 1;
+    text-align: center;
+    z-index: 10;
+}
+
+/* Stiker Hati (Kiri Bawah) */
+.heart-stiker-kiri {
+    position: absolute;
+    bottom: 40px;
+    left: 25px;
+    transform: rotate(15deg);
+    
+    font-size: 10rem;
+    filter: drop-shadow(2px 3px 2px rgba(0,0,0,0.2));
+}
+
+/* Wadah Surat (Isi Pesan) */
+.surat-container {
+    margin-top: 200px;        /* Jarak biar gak nabrak judul */
+    width: 100%;
+    text-align: left;
+}
+
+.subtitle {
+text-align: right;     
+    margin-right: 20px;
+
+    font-size: 3.2rem;
+    font-weight: bold;
+    color: #1A1A1A;
+    margin-bottom: 100px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.message {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+
+
+
+/* --- PENGATURAN STIKER KUCING --- */
+.stiker-kucing {
+    /* JURUS KUNCI: position absolute biar bisa ditempel bebas */
+    position: absolute;
+
+    /* Tempel di POJOK KANAN BAWAH kertas */
+    bottom: 50px;   /* Jarak dari sisi BAWAH kertas */
+    right: 50px;    /* Jarak dari sisi KANAN kertas */
+
+    /* Atur ukuran kucingnya (ubah angkanya sesuai kebutuhan) */
+    width: 400px;
+    height: auto;   /* Tinggi otomatis menyesuaikan */
+
+    /* (Opsional) Miringkan sedikit biar alami */
+    transform: rotate(10deg);
+
+    /* Pastikan dia ada di atas kertas background */
+    z-index: 5;
+}
+/* --- PENGATURAN STIKER KUCING --- */
+.bunga-paness {
+    /* JURUS KUNCI: position absolute biar bisa ditempel bebas */
+    position: absolute;
+
+    /* Tempel di POJOK KANAN BAWAH kertas */
+    top: 15px;   /* Jarak dari sisi BAWAH kertas */
+    left: 20px;    /* Jarak dari sisi KANAN kertas */
+
+    /* Atur ukuran kucingnya (ubah angkanya sesuai kebutuhan) */
+    width: 270px;
+    height: auto;   /* Tinggi otomatis menyesuaikan */
+
+    /* (Opsional) Miringkan sedikit biar alami */
+    transform: rotate(-10deg);
+
+    /* Pastikan dia ada di atas kertas background */
+    z-index: 5;
+}
+
+
+
+
+/* --- GARIS HITAM PEMBATAS --- */
+.garis-hitam {
+    /* Ukuran Garis */
+    width: 120%;           /* Panjang garis (80% dari lebar layar) */
+    height: 10px;          /* Ketebalan garis */
+    background-color: #1A1A1A; /* Warna Hitam */
+    
+    /* Posisi */
+    margin-top: 50px;     /* Jarak dari foto/surat ke garis */
+    border-radius: 10px;  /* Ujung garis tumpul/bulat */
+    
+    /* (Opsional) Efek Bayangan Garis */
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+}
+
+/* --- GAYA GALERI KENANGAN --- */
+.gallery-container {
+    margin-top: 50px;
+    width: 90%;
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+.gallery-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 9rem;
+    color: #800000;
+    margin-bottom: 30px;
+}
+
+/* --- GAYA HATI DI BAWAH JUDUL --- */
+.hati-tengah {
+    width: 1000px;        /* Ukuran hati */
+    height: auto;
+    
+    display: block;     /* Agar bisa diatur marginnya */
+    margin: 0 auto 30px auto; /* Jarak: Atas 0, Kanan-Kiri Auto (Tengah), Bawah 30px */
+    
+    /* (Opsional) Animasi denyut */
+    animation: denyut 1.5s infinite;
+}
+
+/* Animasi Denyut Jantung */
+@keyframes denyut {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* --- WADAH GALERI (GRID SYSTEM) --- */
+/* --- OPSI CANTIK (FLEXBOX) --- */
+.gallery-grid {
+    display: flex;           /* Pakai Flex biar luwes */
+    flex-wrap: wrap;         /* Kalau gak muat, turun ke bawah */
+    justify-content: center; /* KUNCINYA: Biar foto sisa ada di TENGAH */
+    
+    gap: 20px;               /* Jarak antar foto */
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+.gallery-item {
+    /* Kita atur lebarnya pake persen biar responsif */
+    /* 200px adalah ukuran ideal, tapi dia bisa mengecil/membesar */
+    flex: 1 1 300px; 
+    
+    /* Batasi biar gak terlalu melar raksasa */
+    max-width: 300px; 
+    
+    /* Biar tetep kotak */
+    aspect-ratio: 1 / 1; 
+    
+    /* Dekorasi (sama kayak sebelumnya) */
+    overflow: hidden;
+    border-radius: 10px;
+    border: 5px solid white;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+/* ========================================= */
+/* 📱 UNTUK HP (RESPONSIVE) - INI KUNCINYA */
+/* ========================================= */
+
+/* Kalau layar kurang dari 768px (Ukuran Tablet/HP Besar) */
+@media screen and (max-width: 768px) {
+    .gallery-grid {
+        /* Ubah jadi 2 Kolom saja biar muat */
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px;
+    }
+}
+
+/* Kalau layar kurang dari 480px (HP Kecil) */
+@media screen and (max-width: 480px) {
+    .gallery-grid {
+        /* Ubah jadi 1 Kolom (Foto Gede ke bawah) */
+        /* Atau tetep 2 kalau mau kecil-kecil */
+        grid-template-columns: repeat(1, 1fr); 
+    }
+}
+/* Kotak Foto Kecil (Thumbnail) */
+.gallery-item {
+    width: 500px;
+    height: 500px;
+    overflow: hidden;
+    border: 5px solid white;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+    cursor: pointer; /* Ubah kursor jadi tangan */
+    transition: transform 0.3s;
+    border-radius: 10px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Biar gambar kotak sempurna */
+}
+
+.gallery-item:hover {
+    transform: scale(1.1) rotate(3deg); /* Efek goyang pas disentuh */
+}
+
+/* --- GAYA POPUP (MODAL) --- */
+.modal {
+    display: none; /* Sembunyi dulu */
+    position: fixed; 
+    z-index: 999; /* Paling atas */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8); /* Latar belakang gelap transparan */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Kotak Isi Popup */
+.modal-content {
+    background-color: #F9F7F2;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 80%;
+    max-height: 80%;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    animation: zoomIn 0.3s; /* Animasi muncul */
+}
+
+/* Gambar di Popup */
+.modal-content img {
+    max-width: 100%;
+    max-height: 60vh; /* Maksimal tinggi 60% layar */
+    border-radius: 5px;
+    border: 2px solid #333;
+}
+
+/* Tulisan di Popup */
+#caption-popup {
+    margin-top: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* Tombol Silang (X) */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Animasi Zoom */
+@keyframes zoomIn {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+/* --- TATA LETAK BAGIAN 'GROWTH' --- */
+.growth-section-container {
+    display: flex;           
+    flex-direction: row-reverse;     /* Pastikan ini 'row' (Baris), bukan 'row-reverse' */
+    justify-content: center; 
+    align-items: flex-start; 
+    gap: 50px;               
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto;       
+}
+
+/* Kolom Kiri (Galeri) */
+.left-content {
+    flex: 2;                 /* Mengambil porsi lebih lebar (2/3) */
+    text-align: center;
+}
+
+/* Kolom Kanan (Kucing) */
+.right-content-kitten {
+    flex: 1;                 /* Mengambil porsi lebih kecil (1/3) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -100px;     
+    margin-right: -4000px;       /* Turun sedikit biar pas dengan galeri */
+}
+
+/* Gambar Kucing */
+.kitten-image {
+    width: 100%;             /* Lebar menyesuaikan wadah */
+    max-width: 1000px;        /* Batas maksimal biar nggak kegedean */
+    height: auto;
+    border-radius: 15px;     /* Sudut tumpul */
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.2); /* Bayangan */
+}
+
+/* --- BALON UCAPAN (SPEECH BUBBLE) --- */
+.speech-bubble {
+    position: relative;
+    background: #ffffff;     /* Warna latar putih */
+    border-radius: 20px;     /* Bentuk lonjong */
+    padding: 15px 25px;      /* Jarak teks di dalam */
+    color: #333;             /* Warna teks */
+    font-family: 'Dancing Script', cursive; /* Font tulisan tangan */
+    font-size: 5rem;       /* Ukuran teks */
+    text-align: center;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1); /* Bayangan halus */
+    margin-bottom: 25px;     /* Jarak dengan kepala kucing */
+    max-width: 1000px;
+}
+
+/* Ekor Balon Ucapan (Segitiga Kecil) */
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;           /* Posisi di bawah balon */
+    left: 50%;               /* Di tengah horizontal */
+    transform: translateX(-50%);
+    border-width: 15px 15px 0; /* Membuat bentuk segitiga */
+    border-style: solid;
+    border-color: #ffffff transparent; /* Warna segitiga putih */
+    display: block;
+    width: 0;
+}
+
+/* --- RESPONSIVE (BIAR BAGUS DI HP) --- */
+@media screen and (max-width: 900px) {
+    .growth-section-container {
+        flex-direction: column; /* Jadi tumpuk ke bawah di layar kecil */
+        align-items: center;
+        gap: 30px;
+    }
+    .right-content-kitten {
+        margin-top: 30px;
+        flex: auto;         /* Reset ukuran */
+    }
+    .kitten-image {
+        max-width: 250px;   /* Kucing lebih kecil di HP */
+    }
+}
+/* --- COPY KODE INI KE STYLE.CSS --- */
+body {
+    /* 1. MOTIF BACKGROUND LUCU (POLKADOT) */
+    background-color: #F9F7F2; /* Warna dasar Krem */
+    
+    /* Ini kodingan ajaib buat bikin bintik-bintik pink tanpa gambar */
+    background-image: radial-gradient(#ffb7b2 3px, transparent 3px);
+    
+    /* Jarak antar bintik (makin besar angka, makin jarang bintiknya) */
+    background-size: 40px 40px; 
+
+
+    /* 2. PENGATURAN TATA LETAK (WAJIB ADA) */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    
+    /* Jarak aman atas bawah */
+    padding-top: 50px;
+    padding-bottom: 50px; 
+    
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden; 
+}
+/* ================= 4. BAGIAN PERTANYAAN FINAL (YES/NO) ================= */
+
+/* ================= 4. FINAL SECTION (SUPER JUMBO & TENGAH) ================= */
+
+/* Wadah Utama: Kita paksa semua isinya ke tengah */
+.final-section {
+    display: flex;           /* Pakai Flexbox biar gampang ngatur posisi */
+    flex-direction: column;  /* Susun ke bawah (Kucing -> Teks -> Tombol) */
+    align-items: center;     /* Paksa rata tengah horizontal */
+    justify-content: center; /* Paksa rata tengah vertikal */
+    
+    margin-top: 150px;       /* Jarak dari atas */
+    padding-bottom: 200px;   /* Jarak bawah */
+    width: 100%;
+}
+
+/* 1. FOTO KUCING (SUPER GEDE 500px) */
+.cat-display img {
+    width: 500px;            /* Ukuran RAKSASA */
+    height: 500px;           /* Kotak */
+    object-fit: cover;       
+    
+    border-radius: 40px;     /* Sudut makin tumpul */
+    border: 12px solid #800000; /* Bingkai TEBAL */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+    
+    margin-bottom: 50px;     
+    transition: transform 0.2s; 
+}
+
+/* 2. TULISAN PERTANYAAN */
+.final-title {
+    font-family: 'Dancing Script', cursive; 
+    font-size: 7rem;         /* Font JUDUL SEGEDE GABAN */
+    color: #800000;          
+    margin-bottom: 60px;     
+    text-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+/* Wadah Tombol */
+.button-box {
+    display: flex;
+    justify-content: center; 
+    gap: 80px;               /* Jarak antar tombol jauh biar gak salah pencet */
+    flex-wrap: wrap;         /* Kalau di HP turun ke bawah */
+}
+
+/* 3. TOMBOL YES / NO (UKURAN RAKSASA) */
+.btn-yes, .btn-no {
+    padding: 40px 100px;     /* ISI TOMBOL LEBAR BANGET */
+    font-size: 3.5rem;       /* TULISAN SEGEDE DOSA */
+    font-weight: 900;        /* Bold banget */
+    border: none;            
+    border-radius: 200px;    /* Bulat lonjong sempurna */
+    cursor: pointer;         
+    font-family: 'Poppins', sans-serif;
+    color: white !important; /* Tulisan Putih */
+    transition: all 0.3s ease; 
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4); 
+}
+
+/* --- WARNA HIJAU (YES) --- */
+.btn-yes { 
+    background-color: #2ecc71 !important; 
+}
+.btn-yes:hover { 
+    transform: scale(1.1);    
+    background-color: #27ae60 !important; 
+    box-shadow: 0 25px 50px rgba(46, 204, 113, 0.7); 
+}
+
+/* --- WARNA MERAH (NO) --- */
+.btn-no { 
+    background-color: #e74c3c !important; 
+}
+.btn-no:hover { 
+    transform: scale(1.1) rotate(5deg); 
+    background-color: #c0392b !important; 
+}
+
+/* ================= BAGIAN 5. PETI HARTA KARUN (SUPER JUMBO) ================= */
+
+/* ================= BAGIAN PETI HARTA KARUN (JUMBO) ================= */
+
+.treasure-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 150px;       /* Jarak jauh dari bagian atas */
+    padding-bottom: 200px;   /* Jarak bawah agar enak di-scroll */
+    text-align: center;
+    width: 100%;
+}
+
+/* Judul Mystery Chest */
+.treasure-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 6rem;         /* Ukuran jumbo */
+    color: #800000;
+    margin-bottom: 20px;
+    text-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+}
+
+.treasure-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    color: #555;
+    margin-bottom: 80px;
+}
+
+/* Wadah Peti - Ini yang bikin sejajar Kiri ke Kanan */
+.chest-container {
+    display: flex;
+    flex-direction: row;     /* Sejajar ke samping */
+    justify-content: center; 
+    align-items: center;
+    gap: 100px;              /* Jarak antar peti */
+    flex-wrap: wrap;         /* Biar aman kalau dibuka di HP */
+    width: 100%;
+}
+
+.chest-box {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Ukuran Peti Raksasa */
+.chest-img {
+    width: 400px;            /* Ukuran peti raksasa */
+    height: auto;
+    filter: drop-shadow(0 25px 35px rgba(0,0,0,0.4)); 
+    transition: transform 0.2s ease;
+}
+
+/* EFEK GETAR PAS DISENTUH (HOVER) */
+.chest-box:hover .chest-img {
+    animation: shakePeti 0.5s;
+    animation-iteration-count: infinite; 
+}
+
+/* Rumus Goyangan Peti */
+@keyframes shakePeti {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-2deg); }
+  20% { transform: translate(-3px, 0px) rotate(2deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(2deg); }
+  50% { transform: translate(-1px, 2px) rotate(-2deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-2deg); }
+  80% { transform: translate(-1px, -1px) rotate(2deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-2deg); }
+}
+
+/* ================= 6. MODAL POP-UP HADIAH (VERSI RAKSASA) ================= */
+
+/* Wadah Hitam Background */
+.modal {
+    display: none;          /* Sembunyi dulu */
+    position: fixed; 
+    z-index: 99999;         /* Pastikan di atas segalanya */
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.9); /* Hitam pekat biar fokus */
+    display: none;          /* Diatur via JS nanti */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Kotak Putih Tempat Kupon (SUPER JUMBO) */
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 40px;
+    width: 95%;             /* Ambil hampir seluruh lebar layar */
+    max-width: 1100px;      /* Batas lebar RAKSASA */
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.2);
+    animation: zoomDaripada 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efek pop-up mantul */
+}
+
+/* Gambar Kupon Hadiah di Dalam Pop-up */
+#img-popup {
+    width: 100%;            /* Gambar penuhi kotak */
+    height: auto;
+    max-height: 75vh;       /* Jangan sampai lewat tinggi layar */
+    object-fit: contain;
+    border-radius: 20px;
+}
+
+/* Teks Caption di Bawah Kupon */
+#caption-popup {
+    margin-top: 30px;
+    font-size: 3rem;        /* Tulisan SEGEDE GABAN */
+    font-family: 'Poppins', sans-serif;
+    color: #800000;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+/* Tombol Close (X) di Pojok */
+.close {
+    position: absolute;
+    top: -80px;             /* Di atas kotak putih */
+    right: 0;
+    color: white;
+    font-size: 70px;        /* Tombol silang gede */
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close:hover {
+    color: #ffb7b2;
+    transform: scale(1.2);
+}
+
+/* Animasi Muncul Raksasa */
+@keyframes zoomDaripada {
+    from { transform: scale(0.1); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Penyesuaian untuk HP */
+@media screen and (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+        padding: 15px;
+    }
+    #caption-popup {
+        font-size: 1.5rem;
+    }
+}

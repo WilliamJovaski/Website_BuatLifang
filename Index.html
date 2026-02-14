@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Spesial Buat Kamu</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        .vhs-section {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            background: transparent;
+            margin-bottom: 50px; 
+        }
+
+        .vhs-cassette {
+            position: relative;
+            top: -200px;
+            left: 20px;
+            z-index: 10;
+            width: 550px;      
+            height: 320px;     
+            background: #1a1a1a;
+            border-radius: 15px;
+            box-shadow: inset 0 0 30px #000, 15px 15px 40px rgba(0,0,0,0.6);
+            border: 8px solid #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .vhs-cassette:hover {
+            transform: scale(1.02);
+            box-shadow: inset 0 0 30px #000, 15px 15px 45px rgba(255, 77, 109, 0.4);
+        }
+
+        .vhs-cassette::before {
+            content: "KLIK UNTUK PESAN RAHASIA 🤫";
+            position: absolute;
+            top: -45px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff4d6d;
+            letter-spacing: 1px;
+            animation: blinker 1.5s linear infinite;
+        }
+
+        @keyframes blinker { 50% { opacity: 0.3; } }
+
+        .vhs-label {
+            position: absolute;
+            top: 20px;
+            width: 85%;
+            height: 50px;
+            background: #fdfdfd;
+            color: #333;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            border-left: 15px solid #ff4d6d;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .tape-window {
+            width: 450px;
+            height: 140px;
+            background: rgba(10, 10, 10, 0.98);
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border: 4px solid #000;
+            margin-top: 50px;
+            box-shadow: inset 0 0 20px #000;
+        }
+
+        .vhs-spool {
+            width: 100px;
+            height: 100px;
+            background: #333;
+            border-radius: 50%;
+            border: 8px dashed #555;
+            position: relative;
+            animation: spinTape 2.5s linear infinite;
+        }
+
+        .vhs-spool::after {
+            content: "";
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 25px; height: 25px;
+            background: #111;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spinTape {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .vhs-text {
+            position: relative;
+            top: -200px;
+            margin-left: 50px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #222;
+        }
+
+        .vhs-text h3 { font-size: 32px; margin: 0; color: #ff4d6d; }
+        .vhs-text p { font-size: 18px; font-weight: bold; }
+    </style>
+</head>
+
+<body>
+
+    <audio id="clickSound">
+        <source src="https://www.soundjay.com/buttons/button-16.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="vhsSong">
+        <source src="https://www.mboxdrive.com/Laufey-Valentine.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="background"></div>
+
+    <div class="container">
+        <div class="polaroid-gede">
+            <img src="Images/Foto_Date_Christmas.jpeg" alt="Foto Spesial">
+            <div class="caption">Happy Valentine! ❤️</div>
+        </div>
+
+        <div class="card">
+            <img src="Images/Paness_Bunga.png" class="bunga-paness" alt="Bunga">
+            <img src="Images/Gambar_Kucing_Ngasih_bunga-removebg-preview.png" class="stiker-kucing" alt="Kucing">
+            
+            <h1 class="judul-mereng-kanan">Happy<br>Valentine's</h1>
+            <div class="heart-stiker-kiri">❤️</div>
+
+            <div class="surat-container">
+                <h2 class="subtitle">Untuk Lao Lifang!!!</h2>
+                <p class="message">
+Gak terasa ya kita udah 9 bulan bareng-bareng. Dari yang awalnya malu-malu kucing, sekarang malah jadi kucing beneran (yang hobi ngambek kalau laper heuheu). Maaf banget Valentine kali ini kita belum bisa ketemuan langsung, tapi tenang... rasa sayangku ke kamu itu kayak Uangku : Gak Habis Habis dan makin lama makin Banyakkk!                 </p>
+            </div>
+        </div>
+    </div> 
+    
+    <div class="garis-hitam"></div>
+
+    <div class="gallery-container">
+        <h2 class="gallery-title">How My Love Grows For You</h2>
+        <img src="Images/Hati-hatii.png" class="hati-tengah" alt="Love">
+
+        <div class="gallery-grid">
+            <div class="right-content-kitten">
+                <div class="speech-bubble">Here is your Favourite flowers 🌼🌹</div>
+                <img src="Images/Kucing_Megang_Bunga.png" alt="Kucing Bunga" class="kitten-image">
+            </div>
+            
+            <div class="gallery-item" onclick="bukaPopup('Images/Es_Krim.jpeg', 'Ingat gak kita di sini malah main eskrim!')">
+                <img src="Images/Es_Krim.jpeg" alt="Kenangan 1">
+            </div>
+            <div class="gallery-item" onclick="bukaPopup('Images/FL.jpeg', 'Era bertahan hidup kita! WOAHHHH')">
+                <img src="Images/FL.jpeg" alt="Kenangan 2">
+            </div>
+            <div class="gallery-item" onclick="bukaPopup('Images/Porsinara.jpeg', 'Pas kamu nonton aku main volly!')">
+                <img src="Images/Porsinara.jpeg" alt="Kenangan 3">
+            </div>
+            <div class="gallery-item" onclick="bukaPopup('Images/Semir.jpeg', 'Jadi blonde bareng!')">
+                <img src="Images/Semir.jpeg" alt="Kenangan 4">
+            </div>
+            <div class="gallery-item" onclick="bukaPopup('Images/Ayce.jpeg', 'Makan daging pas ultahku!')">
+                <img src="Images/Ayce.jpeg" alt="Kenangan 5">
+            </div>
+        </div> 
+    </div>
+
+    <div class="vhs-section">
+        <div class="vhs-cassette" onclick="bukaSuratRahasia()">
+            <div class="vhs-label">LAUFEY - VALENTINE (9 MONTHS)</div>
+            <div class="tape-window">
+                <div class="vhs-spool"></div>
+                <div class="vhs-spool"></div>
+            </div>
+        </div>
+        <div class="vhs-text">
+            <h3>Now Playing...</h3>
+            <p>Laufey - Valentine ❤️</p>
+        </div>
+    </div>
+
+    <div class="final-section">
+        <div class="cat-display">
+            <img id="kucing-emosi" src="Images/kucing-biasa.jpg" alt="Ekspresi Kucing">
+        </div>
+        <h2 id="teks-emosi" class="final-title">Will you be my Valentine? 🥺</h2>
+        <div class="button-box">
+            <button class="btn-yes" onclick="terimaCinta()">MAU DONG! 😍</button>
+            <button class="btn-no" onclick="tolakCinta()">GAK MAU 😤</button>
+        </div>
+    </div>
+
+    <div class="garis-hitam"></div>
+
+    <div class="treasure-section">
+        <h2 class="treasure-title">Pick A Mystery Chest! 🎁</h2>
+        <p class="treasure-subtitle">Ada 3 hadiah buat kamu, coba buka satu-satu!</p>
+        
+        <div class="chest-container">
+            <div class="chest-box" onclick="bukaPeti(this, 'Images/Kupon_Cokelat.png', 'Selamat! Kamu dapat Voucher Cokelat dan Bunga Spesial! 🍫🎉')">
+                <img src="Images/peti-tutup.png" class="chest-img">
+            </div>
+
+            <div class="chest-box" onclick="bukaPeti(this, 'Images/Kupon_MakanBareng.png', 'Yeay! Kupon Makan Bareng Aku!,Nanti Tukarkan Langsung Ke aku yaa HIHII 🍿')">
+                <img src="Images/peti-tutup.png" class="chest-img">
+            </div>
+
+            <div class="chest-box" onclick="bukaPeti(this, 'Images/Kupon_Matcha.png', 'Waduh! Kamu dapat Matcha Reedemer kuoponn Nanti Tukarkan Langsung Ke aku yaa 😘🤗')">
+                <img src="Images/peti-tutup.png" class="chest-img">
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal" onclick="tutupPopup()">
+        <span class="close">&times;</span>
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <img id="img-popup">
+            <div id="caption-popup"></div>
+        </div>
+    </div>
+
+    <script>
+        function bukaSuratRahasia() {
+            document.getElementById("clickSound").play();
+            
+            var lagu = document.getElementById("vhsSong");
+            lagu.play().then(() => {
+                lagu.volume = 0.6;
+            }).catch(e => console.log("Audio play blocked", e));
+
+            confetti({ particleCount: 150, spread: 80, origin: { x: 0.2, y: 0.8 } });
+            
+            setTimeout(function() {
+                bukaPopup('Images/Foto_Berdua_Sweet.jpeg', 
+                '<b>Surat Rahasia Buat Kamu:</b><br>Tiap putaran kaset ini isinya cuma memori manis bareng kamu. Makasih ya udah jadi bagian paling indah di hidupku selama 9 bulan ini. Happy Valentine, Cantik! ❤️✨');
+            }, 400);
+        }
+
+        function bukaPopup(gambar, teks) {
+            var modal = document.getElementById("myModal");
+            var modalImg = document.getElementById("img-popup");
+            var captionText = document.getElementById("caption-popup");
+            modal.style.display = "flex";
+            modalImg.src = gambar;
+            captionText.innerHTML = teks;
+        }
+
+        function tutupPopup() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        const fotoMarah = ["Images/marah1.png", "Images/marah2.gif", "Images/marah3.jpg", "Images/marah4.jpg", "Images/marah5.gif"];
+        let indexMarah = 0;
+
+        function tolakCinta() {
+            var gambar = document.getElementById("kucing-emosi");
+            var teks = document.getElementById("teks-emosi");
+            gambar.src = fotoMarah[indexMarah];
+            indexMarah = (indexMarah + 1) % fotoMarah.length;
+            const kataMarah = ["JAHAT BANGET! 😾", "KOK GITU SIH?! 😿", "AKU NGAMBEK! 😠", "HARUS YES! 😡", "AWAS YA! 🔪"];
+            teks.innerHTML = kataMarah[Math.floor(Math.random() * kataMarah.length)];
+            teks.style.color = "red";
+        }
+
+        function terimaCinta() {
+            document.getElementById("kucing-emosi").src = "Images/kucing-happy.gif";
+            var teks = document.getElementById("teks-emosi");
+            teks.innerHTML = "YEAYYY! I LOVE YOUUU! 💖🥰🌸";
+            teks.style.color = "#2ecc71";
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            setTimeout(function() {
+                bukaPopup('Images/Sayangku.jpeg', 'Makasih SUDAAA MAU JADI VALENTINE SAYA! ❤️<br>Silahkan Claim Hadiahmu di bawah!');
+            }, 1500);
+        }
+
+        function bukaPeti(element, gambarHadiah, teksHadiah) {
+            var img = element.querySelector(".chest-img");
+            img.src = "Images/peti-buka.png"; 
+            element.style.animation = "none";
+            setTimeout(function() {
+                bukaPopup(gambarHadiah, teksHadiah);
+            }, 500);
+        }
+    </script>
+</body>
+</html>
